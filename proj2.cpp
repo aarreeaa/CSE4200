@@ -238,16 +238,12 @@ void background2()
 	glVertex2d(605.0, 150.0);
 	glVertex2d(595.0, 150.0);
 	glEnd();
+//This is for the body of the Chicken in the overhead shot
+   //body
+  circle(8, 620, 120);
+//head
+ circle(4, 632, 132);
 
-    //chicken
-	glColor3f(1.0, 1.0, 0.0);
-	glLineWidth(1.0);
-	glBegin(GL_POLYGON);
-	glVertex2d(610.0, 110.0);
-	glVertex2d(610.0, 115.0);
-	glVertex2d(620.0, 115.0);
-	glVertex2d(620.0, 110.0);
-	glEnd();
 }
 
 void scene2car1() 
