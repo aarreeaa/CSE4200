@@ -14,9 +14,9 @@ int counter = 0;
 int frame = 0;
 int walkframe = 0;
 int scalecounter = 0;
-int character1[4][2];
-int character2[4][2];
-int character3[4][2];
+int chicken1[4][2];
+int chicken2[4][2];
+int chicken3[4][2];
 
 
 int tweenPoly[10][2];
@@ -42,32 +42,32 @@ void init()
 	glLineWidth(2.0);
 	
     //this are the open legs of the chicken 
-	character1[0][0] = 200;
-	character1[0][1] = 80;
-	character1[1][0] = 160;
-	character1[1][1] = 40;
-	character1[2][0] = 200;
-	character1[2][1] = 80;
-	character1[3][0] = 240;
-	character1[3][1] = 40;
+	chicken1[0][0] = 200;
+	chicken1[0][1] = 80;
+	chicken1[1][0] = 160;
+	chicken1[1][1] = 40;
+	chicken1[2][0] = 200;
+	chicken1[2][1] = 80;
+	chicken1[3][0] = 240;
+	chicken1[3][1] = 40;
     //this are the close legs (when taking a step) legs of the chicken
-    character2[0][0] = 200;
-	character2[0][1] = 80;
-	character2[1][0] = 199;
-	character2[1][1] = 40;
-	character2[2][0] = 200;
-	character2[2][1] = 80;
-	character2[3][0] = 201;
-	character2[3][1] = 40;
+    chicken2[0][0] = 200;
+	chicken2[0][1] = 80;
+	chicken2[1][0] = 199;
+	chicken2[1][1] = 40;
+	chicken2[2][0] = 200;
+	chicken2[2][1] = 80;
+	chicken2[3][0] = 201;
+	chicken2[3][1] = 40;
     //this frame are the closed legs 
-    character3[0][0] = 200;
-	character3[0][1] = 80;
-	character3[1][0] = 199;
-	character3[1][1] = 40;
-	character3[2][0] = 200;
-	character3[2][1] = 80;
-	character3[3][0] = 201;
-	character3[3][1] = 40;
+    chicken3[0][0] = 200;
+	chicken3[0][1] = 80;
+	chicken3[1][0] = 199;
+	chicken3[1][1] = 40;
+	chicken3[2][0] = 200;
+	chicken3[2][1] = 80;
+	chicken3[3][0] = 201;
+	chicken3[3][1] = 40;
 
 }
 
@@ -239,15 +239,10 @@ void background2()
 	glVertex2d(595.0, 150.0);
 	glEnd();
 
-    //chicken
-	glColor3f(1.0, 1.0, 0.0);
-	glLineWidth(1.0);
-	glBegin(GL_POLYGON);
-	glVertex2d(610.0, 110.0);
-	glVertex2d(610.0, 115.0);
-	glVertex2d(620.0, 115.0);
-	glVertex2d(620.0, 110.0);
-	glEnd();
+  //body
+    circle(8, 620, 120);
+//head
+    circle(4, 632, 132);
 }
 
 void scene2car1() 
@@ -572,7 +567,7 @@ void walk2()
 	glColor3f(1.0, 1.0, 0.0);
 	glBegin(GL_LINES);
 	for (i = 0; i < 4; i++)
-		glVertex2i(character3[i][0], character3[i][1]);
+		glVertex2i(chicken3[i][0], chicken3[i][1]);
 	glEnd();
 }
 
@@ -627,7 +622,7 @@ void walk4()
 	glColor3f(1.0, 1.0, 0.0);
 	glBegin(GL_LINES);  //For a stick figure is might be good to do Lines instead. Points are not all connected.
 	for (i = 0; i < 4; i++)
-		glVertex2i(character1[i][0], character1[i][1]);
+		glVertex2i(chicken1[i][0], chicken1[i][1]);
 	glEnd();
 }
 
@@ -655,7 +650,7 @@ void walk5()
 	glColor3f(1.0, 1.0, 0.0);
 	glBegin(GL_LINES);
 	for (i = 0; i < 10; i++)
-		glVertex2i(character2[i][0], character2[i][1]);
+		glVertex2i(chicken2[i][0], chicken2[i][1]);
 	glEnd();
 }
 
@@ -674,7 +669,7 @@ void display()
 	glLineWidth(1.0);
 
 	if (frame == 1) main1();
-	else if ((frame >= 1) && (frame < 400)) 
+	else if ((frame >= 1) && (frame < 520)) 
 	{			//Scene 1
 		glViewport(0, 0, 800, 300);
 		sky();
@@ -686,7 +681,7 @@ void display()
 			if (walkframe == 0) proportion = 0.0;
 			glPushMatrix();
 			glTranslatef(tx, ty, 0.0);
-			tween(character1, character2, 4, proportion, tweenPoly);
+			tween(chicken1, chicken2, 4, proportion, tweenPoly);
 			walk1();
 			glPopMatrix();
 			proportion = proportion + 0.05;
@@ -705,7 +700,7 @@ void display()
 			if (walkframe == 22) proportion = 0.0;
 			glPushMatrix();
 			glTranslatef(tx, ty, 0.0);
-			tween(character2, character1, 4, proportion, tweenPoly);
+			tween(chicken2, chicken1, 4, proportion, tweenPoly);
 			walk3();
 			glPopMatrix();
 			proportion = proportion + 0.05;
@@ -726,30 +721,30 @@ void display()
 		}
 		clouds();
 	}
-	else if ((frame >= 400) && (frame < 455)) 
+	else if ((frame >= 520) && (frame < 575)) 
 	{	//Scene 2
 	    glViewport(0, 0, 800, 300);
 		background2();
 		movecar1();
-		movecar2();
+		//movecar2();
 	}
-	else if ((frame >= 455) && (frame < 515)) 
+	else if ((frame >= 575) && (frame < 635)) 
 	{	//Scene 3
 	    glViewport(0, 0, 800, 300);
 		crashscene();
 	}
-	else if ((frame >= 515) && (frame < 575)) 
+	else if ((frame >= 635) && (frame < 695)) 
 	{	//Scene 4
 	    glViewport(0, 0, 800, 300);
 		message1();
 	}
-	else if ((frame >= 575 ) && (frame < 635 ))
+	else if ((frame >= 695 ) && (frame < 755 ))
 	{
 		//scene 5
 		glViewport(0, 0, 800, 300);
 		message2();
 	}
-	else if (frame > 635) 
+	else if (frame > 755) 
 	{   
 		frame = 0;
 		proportion = 0.0;
@@ -762,7 +757,8 @@ void display()
 void Timer(int) 
 {
 	glutPostRedisplay();
-	glutTimerFunc(1000/60, Timer, 0);
+	//glutTimerFunc(1000/60, Timer, 0);
+	glutTimerFunc(40, Timer, 0);
 }
 
 void visibility(int state) 
@@ -796,5 +792,6 @@ int main(int argc, char** argv)
 
 	return 0;
 }
+
 
 
