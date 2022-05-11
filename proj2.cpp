@@ -1,4 +1,5 @@
-//CSE4200 Project
+//CSE4200 Final Project 
+//Project Name: Drive Safe Animation
 //NAMES: Andrea Morales and Brenden Hernandez
 
 #include <stdio.h>
@@ -94,6 +95,7 @@ void circle(double radius, double xc, double yc)
 	glEnd();
 }
 
+//same function but circle is filled in 
 void circleClouds(double radius, double xc, double yc) 
 {
 	int i;
@@ -238,11 +240,35 @@ void background2()
 	glVertex2d(605.0, 150.0);
 	glVertex2d(595.0, 150.0);
 	glEnd();
-
-  //body
-    circle(8, 620, 120);
-//head
-    circle(4, 632, 132);
+	//Chicken in the scene 
+  	//body
+	glColor3f(1.0, 1.0, 0.0);
+    circleClouds(8, 620, 120);
+	//head
+    circleClouds(6, 632, 127);
+	//legs
+	glLineWidth(2.0);
+	glBegin(GL_LINES);
+	glVertex2d(620.0, 112.0);
+	glVertex2d(615.0, 107.0);
+	glVertex2d(620.0, 112.0);
+	glVertex2d(625.0, 107.0);
+	glEnd();
+	//eye
+	glPointSize(3.0);
+	glColor3f(0.0, 0.0, 0.0);
+	glBegin(GL_POINTS);
+	glVertex2d(634.0, 129.0);
+	glEnd();
+	//wing
+	/*glLineWidth(1.0);
+	glBegin(GL_LINES);
+	glVertex2d(617.0, 120.0);
+	glVertex2d(620.0, 115.0);
+	glVertex2d(620.0, 115.0);
+	glVertex2d(623.0, 120.0);
+	glEnd();*/
+	
 }
 
 void scene2car1() 
@@ -272,32 +298,6 @@ void scene2car1()
 	glEnd();
 }
 
-void scene2car2() 
-{ //Second car in crash scene 
-	glColor3f(0.1, 0.6, 1.0);
-	glLineWidth(1.0);
-	//car body 
-	glBegin(GL_POLYGON);		
-	glVertex2d(615.0, 280.0);
-	glVertex2d(635.0, 280.0);
-	glVertex2d(635.0, 230.0);
-	glVertex2d(615.0, 230.0);
-	glEnd();
-    //1st set of wheels 
-	glBegin(GL_POLYGON);		
-	glVertex2d(610.0, 275.0);
-	glVertex2d(610.0, 265.0);
-	glVertex2d(640.0, 265.0);
-	glVertex2d(640.0, 275.0);
-	glEnd();
-    //2nd set of wheels 
-	glBegin(GL_POLYGON);		
-	glVertex2d(610.0, 235.0);
-	glVertex2d(610.0, 245.0);
-	glVertex2d(640.0, 245.0);
-	glVertex2d(640.0, 235.0);
-	glEnd();
-}
 
 void roadsplit() 
 {
@@ -444,16 +444,6 @@ void movecar1()
 	glPopMatrix();
 	mcx = mcx + 10;
 	mcy = mcy + 0;
-}
-
-void movecar2() 
-{
-	glPushMatrix();
-	glTranslatef(mc2x, mc2y, 0.0);
-	scene2car2();
-	glPopMatrix();
-	mc2x = mc2x + 0;
-	mc2y = mc2y - 2;
 }
 
 void crashscene() 
@@ -726,7 +716,6 @@ void display()
 	    glViewport(0, 0, 800, 300);
 		background2();
 		movecar1();
-		//movecar2();
 	}
 	else if ((frame >= 575) && (frame < 635)) 
 	{	//Scene 3
@@ -744,9 +733,10 @@ void display()
 		glViewport(0, 0, 800, 300);
 		message2();
 	}
-	else if (frame > 755) 
+	else if (frame >= 755) 
 	{   
 		frame = 0;
+		walkframe = 0;
 		proportion = 0.0;
 	}
 	glFlush();
